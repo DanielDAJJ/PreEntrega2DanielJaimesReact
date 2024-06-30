@@ -5,8 +5,20 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import {Link} from 'react-router-dom';
 import CartWidgetComponent from '../CartWidgetComponent/CartWidgetComponent';
+import React from 'react';
+import { getAllCategories } from '../../services/products';
 
 const NavBarComponent = () => {
+  const [categories, setCategories] = React.useState([])
+  React.useEffect(()=>{
+    getAllCategories()
+    .then((res)=>{
+      setCategories(res.data)
+    })
+    .catch((err)=>{
+      console.error(err)
+    })
+  }, [categories])
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
     <Container>
@@ -17,15 +29,15 @@ const NavBarComponent = () => {
         <Nav.Link><Link to={"/"}>Home</Link></Nav.Link>
         <Nav.Link href="#link">Link</Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-                Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-                Separated link
-            </NavDropdown.Item>
+            {categories.map((category)=>{
+              return (
+                <NavDropdown.Item key={category.slug}>
+                  <Link to={`/category/${category.slug}`}>
+                    {category.name}
+                  </Link>
+                </NavDropdown.Item>
+              )
+            })}
         </NavDropdown>
         </Nav>
       </Navbar.Collapse>

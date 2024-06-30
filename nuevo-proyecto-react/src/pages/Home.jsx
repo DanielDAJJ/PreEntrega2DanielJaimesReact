@@ -1,12 +1,11 @@
 import React from 'react'
 import ItemListComponent from '../components/ItemListContainerComponent/ItemListContainerComponent'
+import { UseProducts } from '../hooks/UseProducts'
 
 const Home = () => {
-  return (
-    <div>
-      <ItemListComponent/>
-    </div>
-  )
+  const {products} = UseProducts();
+
+  return <ItemListComponent products={products}/>
 }
 
 export default Home
