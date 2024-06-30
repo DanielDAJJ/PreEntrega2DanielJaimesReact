@@ -1,13 +1,10 @@
-import NavBarComponent from './components/NavBarComponent/NavBarComponent';
-import ItemListComponent from './components/ItemListComponent/ItemListComponent';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MainRouter from './routes/MainRouter';
 
 function App() {
   return (
     <>
-      <NavBarComponent/>
-      <ItemListComponent greeting={"Hola que hace"}/>
+      <MainRouter/>
     </>
   )
 }
