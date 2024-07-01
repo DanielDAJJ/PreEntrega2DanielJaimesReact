@@ -2,12 +2,13 @@ import React from 'react'
 import { UseProductById } from '../hooks/UseProductById'
 import { useParams } from 'react-router-dom'
 import ItemDetailContainerComponent from '../components/ItemDetailContainerComponent/ItemDetailContainerComponent';
+import LoderComponent from '../components/LoaderComponent/LoderComponent';
 
 const Item = () => {
   const {id} = useParams();
-  const {product} = UseProductById(id);
+  const {product, loading} = UseProductById(id);
 
-  return <ItemDetailContainerComponent product={product}/>
+  return loading ? <LoderComponent /> : <ItemDetailContainerComponent product={product}/>
 }
 
 export default Item
