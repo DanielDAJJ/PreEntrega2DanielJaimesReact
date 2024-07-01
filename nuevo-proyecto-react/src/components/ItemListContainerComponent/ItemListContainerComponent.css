@@ -1,5 +1,6 @@
 .itemListContainer{
-    width: 95vw;
+    width: 100%;
+    max-width: 100%;
     padding: 2rem;
     height: auto;
     display: grid;
