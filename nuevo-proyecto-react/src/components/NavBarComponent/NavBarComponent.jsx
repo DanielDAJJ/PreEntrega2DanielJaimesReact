@@ -6,19 +6,11 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from 'react-router-dom';
 import CartWidgetComponent from '../CartWidgetComponent/CartWidgetComponent';
 import React from 'react';
-import { getAllCategories } from '../../services/products';
+import { UseCategory } from '../../hooks/UseCategory';
 
 const NavBarComponent = () => {
-  const [categories, setCategories] = React.useState([])
-  React.useEffect(()=>{
-    getAllCategories()
-    .then((res)=>{
-      setCategories(res.data)
-    })
-    .catch((err)=>{
-      console.error(err)
-    })
-  }, [categories])
+  const {categories} = UseCategory();
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
     <Container>
@@ -26,9 +18,7 @@ const NavBarComponent = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-        <Nav.Link><Link to={"/"}>Home</Link></Nav.Link>
-        <Nav.Link href="#link">Link</Nav.Link>
-        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+        <NavDropdown title="Categorias" id="basic-nav-dropdown">
             {categories.map((category)=>{
               return (
                 <NavDropdown.Item key={category.slug}>
